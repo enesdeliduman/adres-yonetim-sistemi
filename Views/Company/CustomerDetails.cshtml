@@ -1,0 +1,10 @@
+﻿@model Customer
+
+<form asp-action="AddAddressInCustomer" method="post">
+    <div class="form-group">
+        <label for="address">Address</label>
+        <textarea id="address" name="Address" class="form-control" rows="3"></textarea>
+    </div>
+    <input type="hidden" name="Id" value="@Model.CustomerId">
+    <button type="submit" class="btn btn-primary">Ekle</button>
+</form>

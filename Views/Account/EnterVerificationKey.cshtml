@@ -1,0 +1,8 @@
+﻿@model EnterVerificationKeyViewModel
+
+<form asp-action="EnterVerificationKey" method="post" novalidate>
+    <div asp-validation-summary="All"></div>
+    <input asp-for="VerificationKeyLine"/>
+    <button type="submit">Giris</button>
+    [Keyinizin suresi bitti. Lutfen bizimle iletisime gecin]
+</form>

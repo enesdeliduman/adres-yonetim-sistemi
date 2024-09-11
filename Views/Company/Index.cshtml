@@ -1,0 +1,63 @@
+﻿@model CustomerCreateViewModel
+
+<div class="row">
+    <div class="col-9">
+        <form class="form-inline" type="get">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+
+        <div class="container mt-5">
+            @foreach (var customer in ViewBag.Customers)
+            {
+                <!-- Başlık ve Telefon Numarası -->
+                <a asp-action="CustomerDetails" asp-route-id="@customer.CustomerId">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="card-title">@customer.Name</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Telephone Number: @customer.TelephoneNumber</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Adresler -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Addresses</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        @foreach (var address in customer.Addresses)
+                        {
+                            <li class="list-group-item">
+                                @address.AddressLine
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+
+    <form asp-action="CustomerCreate" class="col-3">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="mb-3">
+            <label asp-for="TelephoneNumber" class="form-label"></label>
+            <input asp-for="TelephoneNumber" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label asp-for="Address" class="form-label"></label>
+            <textarea asp-for="Address" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </div>
+    </form>
+
+
+</div>

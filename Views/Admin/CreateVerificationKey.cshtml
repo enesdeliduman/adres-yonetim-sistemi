@@ -1,0 +1,16 @@
+@model CreateVerificationKeyViewModel
+
+<form asp-action="CreateVerificationKey">
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <div class="mb-3">
+        <label asp-for="Email"></label>
+        <input asp-for="Email">
+    </div>
+
+
+    <div class="mb-3">
+        <label asp-for="Date"></label>
+        <input asp-for="Date">
+    </div>
+    <button type="submit">Kaydet</button>
+</form>

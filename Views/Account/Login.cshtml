@@ -1,0 +1,10 @@
+﻿@model UserLoginViewModel
+
+<form asp-action="Login" method="post" novalidate>
+    <div asp-validation-summary="All"></div>
+    <input asp-for="Email"/>
+    <input asp-for="Password"/>
+    <button type="submit">Giris</button>
+    <a asp-action="ForgotPassword">Sifremi unuttum</a>
+    <a asp-action="Register">Kaydol</a>
+</form>
