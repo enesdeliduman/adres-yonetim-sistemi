@@ -129,7 +129,6 @@ namespace AYS.Controllers
             return View();
         }
 
-
         // JSONS
         [HttpPost]
         public async Task<JsonResult> ResendKeyWithEmail(string? Email)
@@ -182,5 +181,7 @@ namespace AYS.Controllers
                 success = false
             });
         }
+
+        
     }
 }

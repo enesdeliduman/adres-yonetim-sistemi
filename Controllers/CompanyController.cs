@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using AYS.Entity;
 using AYS.Entity.Concrete;
+using AYS.Helpers;
 using AYS.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -94,6 +95,49 @@ namespace AYS.Controllers
             {
                 success
             });
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> DeleteAddress(int AddressId)
+        {
+            if (AddressId != null)
+            {
+                var address = await _context.Addresses.FirstOrDefaultAsync(a => a.AddressId == AddressId);
+                if (address != null)
+                {
+                    _context.Addresses.Remove(address);
+                    await _context.SaveChangesAsync();
+                    return Json(new
+                    {
+                        success = true
+                    });
+                }
+            }
+            return Json(new
+            {
+                success = false
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteCustomer(int customerId)
+        {
+            if (customerId == null)
+            {
+                TempDataHelper.SetTempDataMessage(this, "Bir hata oluştu", "error");
+                RedirectToAction("Details", "User", new { id = customerId });
+            }
+            var customer = await _context.Customers.FirstOrDefaultAsync(c => c.CustomerId == customerId);
+            if (customer == null)
+            {
+                TempDataHelper.SetTempDataMessage(this, "Bir hata oluştu", "error");
+                RedirectToAction("Details", "User", new { id = customerId });
+            }
+            _context.Customers.Remove(customer);
+            await _context.SaveChangesAsync();
+
+            TempDataHelper.SetTempDataMessage(this, "Müşteri başarıyla silindi.", "success");
+            return RedirectToAction("Index");
         }
     }
 }
